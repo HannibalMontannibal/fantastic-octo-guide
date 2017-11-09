@@ -20,18 +20,22 @@ public class LevelGenerator : MonoBehaviour {
 	//the space between each movement of the generator- which is going to be the size of the tiles
 	public int tileSize;
 
-    public float waitTime;
+   
 
    public float chanceUp;
-    public float chanceRight;
-    public float chanceDown;
-    
+   public float chanceRight;
+   public float chanceDown;
+
+    public float waitTime;
 
 	// Use this for initialization
 	void Start ()
 	{
 		StartCoroutine (GenerateLevel ());
-	}
+
+        //To make a specific seed:  (the specific number in place of 'x' is the same level)
+        Random.seed = 10;
+    }
 
 	IEnumerator GenerateLevel()
 	{
@@ -41,7 +45,8 @@ public class LevelGenerator : MonoBehaviour {
 			float dir = Random.Range(0f, 1f);
             int tile = Random.Range(0, tiles.Length);
 
-			CallMoveGen(dir);
+            CreateTile(tile);
+            CallMoveGen(dir);
 
             //slows down the generating process slightly, so we can see what's happening
             yield return new WaitForSeconds(waitTime);
@@ -106,8 +111,22 @@ public class LevelGenerator : MonoBehaviour {
 	}
 
     //spawns tiles 
-    void CreateTile(int tile)
+    void CreateTile(int tileIndex)
     {
+        //checks if it DOESN'T contain the current position of the generator
+        if (!createdTiles.Contains(transform.position))
+
+        {
+            GameObject tileObject;
+
+            tileObject = Instantiate(tiles[tileIndex], transform.position, transform.rotation) as GameObject;
+
+            createdTiles.Add(tileObject.transform.position);
+        }
+        else
+        {
+            tileAmount++;
+        }
 
     }
 }
