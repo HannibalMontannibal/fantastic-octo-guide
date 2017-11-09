@@ -22,6 +22,11 @@ public class LevelGenerator : MonoBehaviour {
 
     public float waitTime;
 
+   public float chanceUp;
+    public float chanceRight;
+    public float chanceDown;
+    
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -33,9 +38,10 @@ public class LevelGenerator : MonoBehaviour {
 		//for each tile created, we are moving the generator in one of the directions of the (0, 4) range- 0 being up, 1 being right, 2 being left and 3 being down
 		for (int i = 0; i < tileAmount; i++) 
 		{
-			int dir = Random.Range(0, 4);
+			float dir = Random.Range(0f, 1f);
+            int tile = Random.Range(0, tiles.Length);
 
-			MoveGen(dir);
+			CallMoveGen(dir);
 
             //slows down the generating process slightly, so we can see what's happening
             yield return new WaitForSeconds(waitTime);
@@ -44,6 +50,30 @@ public class LevelGenerator : MonoBehaviour {
        //fixes an error
         yield return 0;
 	}
+
+    //changes the chances of the direction in which the level generator moves
+    //for example, if chanceRight has the highest odds, it's more likely the level will lean to the right rather than the left
+    void CallMoveGen(float ramDir)
+    {
+        if (ramDir < chanceUp)
+        {
+            MoveGen(0);
+        }
+        else if (ramDir < chanceRight)
+        {
+            MoveGen(1);
+        }
+        else if (ramDir < chanceDown)
+        {
+            MoveGen(2);
+        }
+
+        else
+        {
+            MoveGen(3);
+        }
+    }
+
 	//makes the generator move- 'dir' indicating direction 
 	void MoveGen(int dir)
 	{
@@ -74,4 +104,10 @@ public class LevelGenerator : MonoBehaviour {
 
 		}
 	}
+
+    //spawns tiles 
+    void CreateTile(int tile)
+    {
+
+    }
 }
