@@ -7,6 +7,10 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour 
 {
 
+	public GameObject player;
+	public GameObject enemy;
+	public int enemyAmount = 10;
+
 	//the [] shows that this variable is going to be an array
 	public GameObject[] tiles;
 
@@ -156,8 +160,18 @@ public class LevelGenerator : MonoBehaviour
 	{
 		CreateWallValues ();
 		CreateWalls ();
+		SpawnObjects ();
 	}
-		
+		//spawns player and enemies
+	void SpawnObjects()
+	{
+		for (int i = 0; i < enemyAmount; i++) 
+		{
+			//spawns an enemy on a random tile
+			Instantiate(enemy, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
+		}
+	}
+
 	void CreateWallValues()
 	{
 		//checks for the value of the lowest floor piece on the Y axis, then the highest for the Y axis
