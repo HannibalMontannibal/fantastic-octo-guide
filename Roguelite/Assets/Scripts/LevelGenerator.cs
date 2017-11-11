@@ -34,7 +34,7 @@ public class LevelGenerator : MonoBehaviour {
 		StartCoroutine (GenerateLevel ());
 
         //To make a specific seed:  (the specific number in place of 'x' is the same level)
-        Random.seed = 10;
+        //Random.seed = 10;
     }
 
 	IEnumerator GenerateLevel()
