@@ -23,7 +23,7 @@ public class LevelGenerator : MonoBehaviour
 	public int tileAmount;
 
 	//the space between each movement of the generator- which is going to be the size of the tiles
-	public int tileSize;
+	public float tileSize;
 
    
 
