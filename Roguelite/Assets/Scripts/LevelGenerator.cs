@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class LevelGenerator : MonoBehaviour {
+public class LevelGenerator : MonoBehaviour 
+{
 
 	//the [] shows that this variable is going to be an array
 	public GameObject[] tiles;
@@ -28,6 +29,18 @@ public class LevelGenerator : MonoBehaviour {
 
     public float waitTime;
 
+	//wall generation
+	//indicates the lowest floor on the x and y axis (min) as well as the highest for both (max)
+	public float minY = 9999999999;
+	public float maxY = 0;
+	public float minX = 9999999999;
+	public float maxX = 0;
+	//the amount of walls on the x and y axis
+	public float xAmount;
+	public float yAmount;
+	public float extraWallX;
+	public float extraWallY;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -50,6 +63,14 @@ public class LevelGenerator : MonoBehaviour {
 
             //slows down the generating process slightly, so we can see what's happening
             yield return new WaitForSeconds(waitTime);
+
+			//checks if floor generation is done, so it can then spawn in walls (calls WallGen)
+			//checks if i is right on the tile amount, so it gets called only once the floor generation is finished
+			if(i == tileAmount -1)
+			{
+				Finish ();
+			}
+
         }
 
        //fixes an error
@@ -129,4 +150,55 @@ public class LevelGenerator : MonoBehaviour {
         }
 
     }
+	//for when the floors are done spawning in
+	//calls in two functions to make the walls
+	void Finish()
+	{
+		CreateWallValues ();
+		CreateWalls ();
+	}
+		
+	void CreateWallValues()
+	{
+		//checks for the value of the lowest floor piece on the Y axis, then the highest for the Y axis
+		//does the same for the values on the X axis, too
+		for (int i = 0; i < createdTiles.Count; i++) 
+		{
+			if (createdTiles [i].y < minY) 
+			{
+				minY = createdTiles [i].y;
+			}
+			if (createdTiles [i].y > maxY) 
+			{
+				maxY = createdTiles [i].y;
+			}
+
+			if (createdTiles [i].x < minX) 
+			{
+				minX = createdTiles [i].x;
+			}
+			if (createdTiles [i].x > maxX) 
+			{
+				maxX = createdTiles [i].x;
+			}
+
+			xAmount = ((maxX - minX) / tileSize) + extraWallX;
+			yAmount = ((maxY - minY) / tileSize) + extraWallY;
+		}
+	}
+
+	void CreateWalls()
+	{
+		for (int x = 0; x < xAmount; x++) 
+		{
+			for (int y = 0; y < yAmount; y++) 
+			{
+				//instantiates a wall on the position, provided it is unoccupied by a tile. It then adds on infinitely.
+				if (!createdTiles.Contains (new Vector3 ((minX - (extraWallX * tileSize) / 2) + (x * tileSize), (minY - (extraWallY * tileSize) / 2) + (y * tileSize)))) 
+				{
+					Instantiate (wall, new Vector3 ((minX - (extraWallX * tileSize) / 2) + (x * tileSize), (minY - (extraWallY * tileSize) / 2) + (y * tileSize)), transform.rotation);
+				}
+			}
+		}
+	}
 }
