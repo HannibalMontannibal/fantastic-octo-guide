@@ -123,7 +123,7 @@ public class LevelGenerator : MonoBehaviour
                 break;
 
 		case 2:
-                transform.position = new Vector3(transform.position.x + tileSize, transform.position.y - tileSize, 0);
+			transform.position = new Vector3(transform.position.y + tileSize, transform.position.y - tileSize, 0);
 
                 break;
 
