@@ -7,11 +7,23 @@ public class PlayerController : MonoBehaviour
 	//determines the player's movement speed
 	public float moveSpeed;
 
+
+	//private Rigidbody2D rb2d;
 	// Use this for initialization
-	void Start () 
+	void Start()
 	{
-		
+		//{
+		//	rb2d = GetComponent<Rigidbody2D> ();
+		//}
 	}
+
+	//void OnCollisionEnter(Collision collision) 
+	//{
+		//if(gameObject.CompareTag("Wall"))
+		//{
+		//	rb2d.velocity = Vector3.zero;
+		//}
+	//}
 	
 	// Update is called once per frame
 	void Update () 
