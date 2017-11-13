@@ -9,6 +9,7 @@ public class LevelGenerator : MonoBehaviour
 
 	public GameObject player;
 	public GameObject enemy;
+	public GameObject camera;
 	public int enemyAmount = 10;
 
 	//the [] shows that this variable is going to be an array
@@ -45,6 +46,8 @@ public class LevelGenerator : MonoBehaviour
 	public float extraWallX;
 	public float extraWallY;
 
+	public GameObject mainCamera;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -53,6 +56,8 @@ public class LevelGenerator : MonoBehaviour
         //To make a specific seed:  (the specific number in place of 'x' is the same level)
         //Random.seed = 10;
     }
+
+
 
 	IEnumerator GenerateLevel()
 	{
@@ -161,12 +166,14 @@ public class LevelGenerator : MonoBehaviour
 		CreateWallValues ();
 		CreateWalls ();
 		SpawnObjects ();
+
 	}
 		//spawns player and enemies
 	void SpawnObjects()
 	{
 		Instantiate(player, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
-
+		Instantiate(camera, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
+		//levelLoaded = true;
 		for (int i = 0; i < enemyAmount; i++) 
 		{
 			//spawns an enemy on a random tile
