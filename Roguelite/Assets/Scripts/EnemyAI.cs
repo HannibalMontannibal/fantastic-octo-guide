@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
 
+	public int currentHealth;
+	public int maxHealth;
+
 	public float moveSpeed;
 	//checks whether the enemy is moving or not, for how long, and for how long to wait
 	public float timeBetweenMove;
@@ -13,6 +16,7 @@ public class EnemyAI : MonoBehaviour
 	private float timeToMoveCounter;
 
 	private Rigidbody2D myrigid;
+	public Animator anim;
 
 	//checks whether the enemy moving is true or false
 	private bool moving;
@@ -21,6 +25,9 @@ public class EnemyAI : MonoBehaviour
 
 	void Start()
 	{
+		//at spawn, the enemy's current health is whatever it's maximum health is.
+		currentHealth = maxHealth;
+
 		myrigid = GetComponent<Rigidbody2D>();
 
 		//timeBetweenMoveCounter = Random.Range(timeBetweenMove * 0.75f, timeBetweenMove * 1.25f);
@@ -59,6 +66,19 @@ public class EnemyAI : MonoBehaviour
 
 		}
 
+		//if the enemy's health is equal to OR less than zero, it will get destroyed- ie die
+		if (currentHealth <= 0) 
+		{
+			Destroy (gameObject);
+		}
+			
+	}
 
+	//for taking damage, the value of which is in the Attacking script
+	public void Damage (int damage)
+	{
+		currentHealth -= damage;
+		// the line to play an animation of the enemy getting hit is here: gameObject.GetComponent<Animation> ().Play ("Hit");
+		//...I just haven't made the animation yet orz
 	}
 }﻿
