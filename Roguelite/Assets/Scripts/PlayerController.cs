@@ -26,12 +26,25 @@ public class PlayerController : MonoBehaviour
 			myRigidbody.velocity = new Vector2 (Input.GetAxisRaw("Horizontal") * moveSpeed, myRigidbody.velocity.y);
 		}
 
-		//checks if the input on the y axis is moving the player up or down
+		//checks if the input on the y axis is mov ing the player up or down
 
 		if (Input.GetAxisRaw ("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < 0.5f) 
 		{
 			//transform.Translate (new Vector3 (0f, Input.GetAxisRaw ("Vertical") * moveSpeed * Time.deltaTime, 0f));
 			myRigidbody.velocity = new Vector2 (myRigidbody.velocity.x, Input.GetAxisRaw("Vertical")  * moveSpeed);
 		}
+
+		//if the player is going left, the sprite is flipped to show them going left.
+		if (Input.GetAxis ("Horizontal") < -0.1f) 
+		{
+			transform.localScale = new Vector3 (-1, 1, 1);
+		}
+
+		//if the player is going right, the sprite is facing right
+		if (Input.GetAxis ("Horizontal") > 0.1f) 
+		{
+			transform.localScale = new Vector3 (1, 1, 1);
+		}
+			
 	}
 }

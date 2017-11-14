@@ -39,6 +39,20 @@ public class EnemyAI : MonoBehaviour
 	}
 	void Update()
 	{
+
+
+		//if the enemy is going left, the sprite is flipped to show them going left.
+		if (Input.GetAxis ("Horizontal") < -0.1f) 
+		{
+			transform.localScale = new Vector3 (-1, 1, 1);
+		}
+
+		//if the enemy is going right, the sprite is facing right
+		if (Input.GetAxis ("Horizontal") > 0.1f) 
+		{
+			transform.localScale = new Vector3 (1, 1, 1);
+		}
+
 		//the move counter counts down, and upon zero the enemy moves in a random direction
 		//once the enemy is done moving, the counter begins once more
 		if (moving)
