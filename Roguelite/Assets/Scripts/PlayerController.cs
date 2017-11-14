@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour 
 {
+	//determines player health
+	public int currentHealth;
+	public int maxHealth;
+
 	//determines the player's movement speed
 	public float moveSpeed;
 
@@ -12,6 +16,9 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		//at spawn, the enemy's current health is whatever it's maximum health is.
+		currentHealth = maxHealth;
+
 		myRigidbody = GetComponent<Rigidbody2D>();
 	}
 
@@ -44,6 +51,12 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetAxis ("Horizontal") > 0.1f) 
 		{
 			transform.localScale = new Vector3 (1, 1, 1);
+		}
+
+		//if the player's health is equal to OR less than zero, it will get destroyed- ie die
+		if (currentHealth <= 0) 
+		{
+			Destroy (gameObject);
 		}
 			
 	}
