@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+	public Transform target;
+	//how close the player needs to be in order for the enemy to start chasing
+	public float chaseRange;
+
 
 	public int currentHealth;
 	public int maxHealth;
@@ -14,6 +18,7 @@ public class EnemyAI : MonoBehaviour
 	private float timeBetweenMoveCounter;
 	public float timeToMove;
 	private float timeToMoveCounter;
+
 
 	private Rigidbody2D myrigid;
 	public Animator anim;
@@ -39,7 +44,22 @@ public class EnemyAI : MonoBehaviour
 	}
 	void Update()
 	{
+		//gets the distance of the target and checks to see if it is close enough to chase
+		float distanceToTarget = Vector3.Distance (transform.position, target.position);
 
+		if (distanceToTarget < chaseRange)
+		
+		{
+			//start chasing the target- turns and moves to target
+			Vector3 targetDir = target.position = transform.position;
+			float angle = Mathf.Atan2 (targetDir.y, targetDir.x) * Mathf.Rad2Deg - 90f;
+			Quaternion q = Quaternion.AngleAxis (angle, Vector3.forward);
+			transform.rotation = Quaternion.RotateTowards (transform.rotation, q, 180);
+
+			//moves the enemy
+			transform.Translate (Vector3.up * Time.deltaTime * moveSpeed);
+
+		}
 
 		//if the enemy is going left, the sprite is flipped to show them going left.
 		if (Input.GetAxis ("Horizontal") < -0.1f) 
