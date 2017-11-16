@@ -171,13 +171,21 @@ public class LevelGenerator : MonoBehaviour
 		//spawns player and enemies
 	void SpawnObjects()
 	{
-		Instantiate(player, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
-		Instantiate(camera, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
+		GameObject playerInstance = Instantiate(player, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
+
+		// Instantiate & configure camera
+		GameObject cameraInstance = Instantiate(camera, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
+		cameraInstance.transform.Translate (0, 0, -10);
+		CameraController cc = cameraInstance.GetComponent<CameraController> ();
+		cc.followTarget = playerInstance;
+
 		//levelLoaded = true;
 		for (int i = 0; i < enemyAmount; i++) 
 		{
 			//spawns an enemy on a random tile
-			Instantiate(enemy, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
+			GameObject enemyInstance = Instantiate(enemy, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
+			EnemyAI eai = enemyInstance.GetComponent<EnemyAI> ();
+			eai.target = playerInstance.transform;
 		}
 	}
 
