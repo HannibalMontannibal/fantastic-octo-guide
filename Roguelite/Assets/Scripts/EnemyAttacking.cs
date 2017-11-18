@@ -22,17 +22,22 @@ public class EnemyAttacking : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        //checks distance between enemy and player, seeing if the player is close enough to attack
-        float distanceToPlayer = Vector3.Distance(transform.position, target.position);
-        if (distanceToPlayer < attackRange)
-        {
-			//checks to see if enough time has passed since the last attack. Only does attack if enough time has passed.
-			if (Time.time > lastAttackTime + attackDelay) {
-				target.SendMessage ("Damage", damage, SendMessageOptions.DontRequireReceiver);
-				//Records the time the enemy last attacked
-				lastAttackTime = Time.time;
-			}
-        }
+        
 
     }
+	void OnTriggerEnter2d(Collider2D other)
+	{
+		if (!other.CompareTag ("Player")) {
+			//checks distance between enemy and player, seeing if the player is close enough to attack
+			float distanceToPlayer = Vector3.Distance (transform.position, target.position);
+			if (distanceToPlayer < attackRange) {
+				//checks to see if enough time has passed since the last attack. Only does attack if enough time has passed.
+				if (Time.time > lastAttackTime + attackDelay) {
+					target.SendMessage ("Damage", damage, SendMessageOptions.DontRequireReceiver);
+					//Records the time the enemy last attacked
+					lastAttackTime = Time.time;
+				}
+			}
+		}
+	}
 }
