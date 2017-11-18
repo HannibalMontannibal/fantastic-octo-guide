@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
 
 
 	private Rigidbody2D myrigid;
-	public Animator anim;
+	private Animator anim;
 
 	//checks whether the enemy moving is true or false
 	private bool moving;
@@ -40,6 +40,8 @@ public class EnemyAI : MonoBehaviour
 
 		timeBetweenMoveCounter = Random.Range(timeBetweenMove * 0.75f, timeBetweenMove * 1.25f);
 		timeToMoveCounter = Random.Range(timeToMove * 0.75f, timeBetweenMove * 1.25f);
+
+		anim = gameObject.GetComponent<Animator> ();
 
 	}
 	void Update()
@@ -65,9 +67,11 @@ public class EnemyAI : MonoBehaviour
 
 			//the move counter counts down, and upon zero the enemy moves in a random direction
 			//once the enemy is done moving, the counter begins once more
-			if (moving) {
+			if (moving)
+			{
 				timeToMoveCounter -= Time.deltaTime;
 				myrigid.velocity = moveDirection;
+
 
 				if (timeToMoveCounter < 0f) {
 					moving = false;
@@ -81,8 +85,10 @@ public class EnemyAI : MonoBehaviour
 					timeToMoveCounter = Random.Range (timeToMove * 0.75f, timeToMove * 1.25f);
 
 					moveDirection = new Vector3 (Random.Range (-1f, 1f) * moveSpeed, Random.Range (-1f, 1f) * moveSpeed, 0f);
-				}
+					anim.SetBool ("Walking", moving);
 
+
+				}
 			}
 		}
 
