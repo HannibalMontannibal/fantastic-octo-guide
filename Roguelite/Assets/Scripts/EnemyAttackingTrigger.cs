@@ -12,9 +12,9 @@ public class EnemyAttackingTrigger : MonoBehaviour
         //calls a function with whatever is being collided with- ie the player
         //if whatever is hit has the tag "Player", then the damage function will be called, causing the player to take damage
 
-        if (col.isTrigger != true && col.CompareTag("Player"))
-        {
-            col.SendMessageUpwards("Damage", dmg);
-        }
+  //      if (col.isTrigger != true && col.CompareTag("Player"))
+    //    {
+//            col.SendMessageUpwards("Damage", dmg);
+      //  }
     }
 }

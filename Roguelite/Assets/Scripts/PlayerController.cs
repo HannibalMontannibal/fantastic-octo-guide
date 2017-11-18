@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody2D myRigidbody;
 
+	private Animator anim;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -54,10 +56,18 @@ public class PlayerController : MonoBehaviour
 		}
 
 		//if the player's health is equal to OR less than zero, it will get destroyed- ie die
+		//if (currentHealth <= 0) 
+		//{
+		//	Destroy (gameObject);
+		//}
+			
+	}
+	public void TakeDamage(int damage)
+	{
+		currentHealth -= damage;
 		if (currentHealth <= 0) 
 		{
-			Destroy (gameObject);
+			Debug.Log ("Dead");
 		}
-			
 	}
 }

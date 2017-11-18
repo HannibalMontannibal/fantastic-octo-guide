@@ -1,11 +1,18 @@
 fileFormatVersion: 2
 guid: 39af70598d0499c4a92943d24d825581
-timeCreated: 1510460598
+timeCreated: 1511006708
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Chicken1
     21300002: Bandit1
+    21300004: cOIil6c_0
+    21300006: cOIil6c_1
+    21300008: cOIil6c_2
+    21300010: cOIil6c_3
+    21300012: cOIil6c_4
+    21300014: cOIil6c_5
+    21300016: cOIil6c_6
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -14,8 +21,6 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
-    mipMapsPreserveCoverage: 0
-    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -31,13 +36,10 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    serializedVersion: 2
     filterMode: 0
     aniso: -1
     mipBias: -1
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -88,7 +90,6 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Bandit1
@@ -102,10 +103,8 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
       tessellationDetail: 0
     outline: []
-    physicsShape: []
   spritePackingTag: 
   userData: 
   assetBundleName: 
