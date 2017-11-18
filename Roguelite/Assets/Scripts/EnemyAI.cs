@@ -9,7 +9,6 @@ public class EnemyAI : MonoBehaviour
 	public float chaseRange;
 	public float stopRange = 20f;
 
-
 	public int currentHealth;
 	public int maxHealth;
 
@@ -99,6 +98,8 @@ public class EnemyAI : MonoBehaviour
 		else if (myrigid.velocity.x < -0.001f) {
 			transform.localScale = new Vector3 (-1, 1, 1);
 		}
+
+    
 	}
 
 	//for taking damage, the value of which is in the Attacking script
