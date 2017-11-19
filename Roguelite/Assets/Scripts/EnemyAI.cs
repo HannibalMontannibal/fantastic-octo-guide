@@ -20,6 +20,15 @@ public class EnemyAI : MonoBehaviour
 	private float timeToMoveCounter;
 
 
+	//how close the player needs to be for the enemy to attack
+	public float attackRange;
+	public int damage;
+
+	//determines the time being delayed between attacks
+	private float lastAttackTime;
+	public float attackDelay;
+
+
 	private Rigidbody2D myrigid;
 	private Animator anim;
 
@@ -111,5 +120,21 @@ public class EnemyAI : MonoBehaviour
 		currentHealth -= damage;
 		// the line to play an animation of the enemy getting hit is here: gameObject.GetComponent<Animation> ().Play ("Hit");
 		//...I just haven't made the animation yet orz
+	}
+	void OnTriggerEnter2d(Collider2D other)
+	{
+		if (!other.CompareTag ("Player")) {
+			//checks distance between enemy and player, seeing if the player is close enough to attack
+			float distanceToPlayer = Vector3.Distance (transform.position, target.position);
+			if (distanceToPlayer < attackRange) {
+				//checks to see if enough time has passed since the last attack. Only does attack if enough time has passed.
+				if (Time.time > lastAttackTime + attackDelay) {
+					target.SendMessageUpwards ("Damage", damage);
+					//, SendMessageOptions.DontRequireReceiver
+					//Records the time the enemy last attacked
+					lastAttackTime = Time.time;
+				}
+			}
+		}
 	}
 }﻿

@@ -14,7 +14,7 @@ public class EnemyAttackingTrigger : MonoBehaviour
 
        if (col.isTrigger != true && col.CompareTag("Player"))
       {
-			col.SendMessageUpwards("Damage", dmg, SendMessageOptions.DontRequireReceiver);
+			col.SendMessageUpwards("Damage", dmg);
         }
     }
 }
