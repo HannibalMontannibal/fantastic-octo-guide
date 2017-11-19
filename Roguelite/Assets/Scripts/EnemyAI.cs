@@ -73,7 +73,7 @@ public class EnemyAI : MonoBehaviour
 				myrigid.velocity = moveDirection;
 				if (timeToMoveCounter < 0f) {
 					moving = false;
-					anim.SetBool ("Idling", moving);
+					//anim.SetBool ("Idling", moving);
 					timeBetweenMoveCounter = Random.Range (timeBetweenMove * 0.75f, timeBetweenMove * 1.25f);
 				}
 			} else {
@@ -81,7 +81,7 @@ public class EnemyAI : MonoBehaviour
 				myrigid.velocity = Vector2.zero;
 				if (timeBetweenMoveCounter < 0f) {
 					moving = true;
-					anim.SetBool ("Walking", moving);
+					//anim.SetBool ("Walking", moving);
 					timeToMoveCounter = Random.Range (timeToMove * 0.75f, timeToMove * 1.25f);
 
 					moveDirection = new Vector3 (Random.Range (-1f, 1f) * moveSpeed, Random.Range (-1f, 1f) * moveSpeed, 0f);
