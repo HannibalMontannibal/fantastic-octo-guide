@@ -127,15 +127,16 @@ public class EnemyAI : MonoBehaviour
 			transform.localScale = new Vector3 (-1, 1, 1);
 		}
 
-    
+		print ("Setting speed");
+		GetComponent<Animator> ().SetFloat ("Speed", myrigid.velocity.magnitude);
 	}
 
 	//for taking damage, the value of which is in the Attacking script
 	public void Damage (int damage)
 	{
 		currentHealth -= damage;
-		gameObject.GetComponent<Animation> ().Play ("Hurt");
-		//...I just haven't made the animation yet orz
+		gameObject.GetComponent<Animator> ().SetTrigger ("Hurt");
+
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
