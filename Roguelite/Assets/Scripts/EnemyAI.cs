@@ -98,7 +98,7 @@ public class EnemyAI : MonoBehaviour
 				myrigid.velocity = moveDirection;
 				if (timeToMoveCounter < 0f) {
 					moving = false;
-					//anim.SetBool ("Idling", moving);
+					anim.SetBool ("Idling", moving);
 					timeBetweenMoveCounter = Random.Range (timeBetweenMove * 0.75f, timeBetweenMove * 1.25f);
 				}
 			} else {
@@ -106,7 +106,7 @@ public class EnemyAI : MonoBehaviour
 				myrigid.velocity = Vector2.zero;
 				if (timeBetweenMoveCounter < 0f) {
 					moving = true;
-					//anim.SetBool ("Walking", moving);
+					anim.SetBool ("Walking", moving);
 					timeToMoveCounter = Random.Range (timeToMove * 0.75f, timeToMove * 1.25f);
 
 					moveDirection = new Vector3 (Random.Range (-1f, 1f) * moveSpeed, Random.Range (-1f, 1f) * moveSpeed, 0f);
@@ -134,7 +134,7 @@ public class EnemyAI : MonoBehaviour
 	public void Damage (int damage)
 	{
 		currentHealth -= damage;
-		// the line to play an animation of the enemy getting hit is here: gameObject.GetComponent<Animation> ().Play ("Hit");
+		gameObject.GetComponent<Animation> ().Play ("Hurt");
 		//...I just haven't made the animation yet orz
 	}
 
