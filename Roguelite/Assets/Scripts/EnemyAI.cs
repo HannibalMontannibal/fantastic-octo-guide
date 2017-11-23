@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
 	public Transform target;
+
 	//how close the player needs to be in order for the enemy to start chasing
 	public float chaseRange;
 	public float stopRange = 20f;
@@ -34,6 +35,7 @@ public class EnemyAI : MonoBehaviour
 
 	//checks whether the enemy moving is true or false
 	private bool moving;
+	private bool withinAttackRange;
 
 	private Vector3 moveDirection;
 
@@ -57,6 +59,20 @@ public class EnemyAI : MonoBehaviour
 	{
 		//gets the distance of the target and checks to see if it is close enough to chase
 		float distanceToTarget = Vector3.Distance (transform.position, target.position);
+
+		if (withinAttackRange) {
+			//checks distance between enemy and player, seeing if the player is close enough to attack
+			//float distanceToPlayer = Vector3.Distance (transform.position, target.position);
+			//if (distanceToPlayer < attackRange) {
+			//checks to see if enough time has passed since the last attack. Only does attack if enough time has passed.
+			if (Time.time > lastAttackTime + attackDelay) {
+				target.gameObject.SendMessage ("TakeDamage", damage);
+				//, SendMessageOptions.DontRequireReceiver
+				//Records the time the enemy last attacked
+				lastAttackTime = Time.time;
+			}
+			//}
+		}
 
 		if (distanceToTarget < stopRange) {
 			myrigid.velocity = Vector2.zero;
@@ -121,20 +137,18 @@ public class EnemyAI : MonoBehaviour
 		// the line to play an animation of the enemy getting hit is here: gameObject.GetComponent<Animation> ().Play ("Hit");
 		//...I just haven't made the animation yet orz
 	}
-	void OnTriggerEnter2d(Collider2D other)
+
+	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (!other.CompareTag ("Player")) {
-			//checks distance between enemy and player, seeing if the player is close enough to attack
-			float distanceToPlayer = Vector3.Distance (transform.position, target.position);
-			if (distanceToPlayer < attackRange) {
-				//checks to see if enough time has passed since the last attack. Only does attack if enough time has passed.
-				if (Time.time > lastAttackTime + attackDelay) {
-					target.SendMessageUpwards ("Damage", damage);
-					//, SendMessageOptions.DontRequireReceiver
-					//Records the time the enemy last attacked
-					lastAttackTime = Time.time;
-				}
-			}
+		if (other.CompareTag ("Player")) {
+			withinAttackRange = true;
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.CompareTag ("Player")) {
+			withinAttackRange = false;
 		}
 	}
 }﻿
