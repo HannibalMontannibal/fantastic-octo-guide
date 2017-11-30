@@ -39,6 +39,8 @@ public class EnemyAI : MonoBehaviour
 
 	private Vector3 moveDirection;
 
+	public LevelGenerator levelGenerator;
+
 	void Start()
 	{
 		//at spawn, the enemy's current health is whatever it's maximum health is.
@@ -117,6 +119,7 @@ public class EnemyAI : MonoBehaviour
 		//if the enemy's health is equal to OR less than zero, it will get destroyed- ie die
 		if (currentHealth <= 0) 
 		{
+			levelGenerator.EnemyDied (transform.position);
 			Destroy (gameObject);
 		}
 			

@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerAttacking : MonoBehaviour
 {
+	private bool canAttack = true;
 	private bool attacking = false;
 
-	private float attackTimer = 0;
-	private float attackCoolDown = 0.3f;
+	private float coolDownTimer = 0;
+	public float coolDownLength = 1.0f;
 
-	public Collider2D attackTrigger; 
+	private float animationTimer = 0;
+	public float animationLength = 0.6f;
+
+	public Collider2D attackTrigger;
 
 	private Animator anim;
 
@@ -19,28 +23,28 @@ public class PlayerAttacking : MonoBehaviour
 		attackTrigger.enabled = false;
 	}
 
-	void Update()
+	void Start()
 	{
-		//activates the attack box collider when you hit Space
-		if(Input.GetKeyDown(KeyCode.Space) && !attacking)
-			{
-				attacking = true;
-				attackTimer = attackCoolDown;
+		coolDownTimer = coolDownLength;
+		animationTimer = animationLength;
+	}
 
-			attackTrigger.enabled = true;
-			}
-		if (attacking) 
-		if (attackTimer > 0)
-		{
-			//cooldown for attack
-			attackTimer -= Time.deltaTime;
+	void Update ()
+	{
+		coolDownTimer += Time.deltaTime;
+		animationTimer += Time.deltaTime;
+
+		canAttack = coolDownTimer > coolDownLength;
+
+		if (Input.GetKeyDown (KeyCode.Space) && canAttack) {
+			coolDownTimer = 0;
+			animationTimer = 0;
 		}
 
-		else 
-		{
-			attacking = false;
-			attackTrigger.enabled = false;
-		}
+		attacking = animationTimer < animationLength;
+
+		attackTrigger.enabled = attacking;
+
 		anim.SetBool ("Attacking", attacking);
 	}
 }
