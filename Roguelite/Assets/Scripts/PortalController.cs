@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PortalController : MonoBehaviour 
 {
+
 	[SerializeField] private string loadLevel;
 
 	void OnTriggerEnter2D(Collider2D other)

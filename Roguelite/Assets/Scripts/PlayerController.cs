@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
 		if (currentHealth <= 0) 
 		{
 			Debug.Log ("Dead");
+			Destroy (gameObject);
 		}
 	}
 }

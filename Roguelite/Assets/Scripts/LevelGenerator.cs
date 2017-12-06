@@ -10,6 +10,8 @@ public class LevelGenerator : MonoBehaviour
 	public GameObject player;
 	public GameObject enemy;
 	public GameObject camera;
+	public GameObject portal;
+
 	public int enemyAmount = 10;
 
 	//the [] shows that this variable is going to be an array
@@ -128,7 +130,7 @@ public class LevelGenerator : MonoBehaviour
                 break;
 
 		case 2:
-			transform.position = new Vector3(transform.position.x + tileSize, transform.position.y - tileSize, 0);
+			transform.position = new Vector3(transform.position.x, transform.position.y - tileSize, 0);
 
                 break;
 
@@ -186,6 +188,7 @@ public class LevelGenerator : MonoBehaviour
 			GameObject enemyInstance = Instantiate(enemy, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
 			EnemyAI eai = enemyInstance.GetComponent<EnemyAI> ();
 			eai.target = playerInstance.transform;
+			eai.levelGenerator = this;
 		}
 	}
 
@@ -230,6 +233,16 @@ public class LevelGenerator : MonoBehaviour
 					Instantiate (wall, new Vector3 ((minX - (extraWallX * tileSize) / 2) + (x * tileSize), (minY - (extraWallY * tileSize) / 2) + (y * tileSize)), transform.rotation);
 				}
 			}
+		}
+	}
+
+	public void EnemyDied(Vector3 position)
+	{
+		enemyAmount--;
+
+		if (enemyAmount == 0) {
+			print ("Spawn portal at: " + position);
+			Instantiate (portal, position, Quaternion.identity);
 		}
 	}
 }
