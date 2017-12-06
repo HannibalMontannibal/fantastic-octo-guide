@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour
 	}
 	public void TakeDamage(int damage)
 	{
+		gameObject.GetComponent<Animator> ().SetTrigger ("Hurt");
+
 		currentHealth -= damage;
 		if (currentHealth <= 0) 
 		{
