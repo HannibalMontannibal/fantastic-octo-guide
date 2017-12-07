@@ -2,7 +2,7 @@
 //so the List can be used
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class LevelGenerator : MonoBehaviour 
 {
@@ -11,7 +11,16 @@ public class LevelGenerator : MonoBehaviour
 	public GameObject enemy;
 	public GameObject camera;
 	public GameObject portal;
+	public GameObject gameOverText;
 
+	public Text scoreText;
+	public Text highScore;
+	public Text healthText;
+	public Text enemiesText;
+
+	public bool gameOver = false;
+
+	private int score = 0;
 	public int enemyAmount = 10;
 
 	//the [] shows that this variable is going to be an array
@@ -57,9 +66,18 @@ public class LevelGenerator : MonoBehaviour
 
         //To make a specific seed:  (the specific number in place of 'x' is the same level)
         //Random.seed = 10;
-    }
 
+		//makes the cursor invisible
+		Cursor.visible = false;
 
+		int hs = GetHighScore();
+		highScore.text = "High Score: " + hs.ToString ();
+	}
+
+	int GetHighScore()
+	{
+		return PlayerPrefs.GetInt ("HighScore", 0);
+	}
 
 	IEnumerator GenerateLevel()
 	{

@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
 	private Animator anim;
 
+	public bool playerDead = false;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -71,6 +73,10 @@ public class PlayerController : MonoBehaviour
 		{
 			Debug.Log ("Dead");
 			Destroy (gameObject);
+
+			{
+				playerDead = true;
+			}
 		}
 	}
 }
