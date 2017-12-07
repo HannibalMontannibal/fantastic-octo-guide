@@ -3,22 +3,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelGenerator : MonoBehaviour 
 {
+	public GameObject gameOverText;
+	//public bool playerDead = false;
+	public bool gameOver = false;
 
 	public GameObject player;
 	public GameObject enemy;
 	public GameObject camera;
 	public GameObject portal;
-	public GameObject gameOverText;
 
 	public Text scoreText;
 	public Text highScore;
+	public Text enemyCount;
 	public Text healthText;
-	public Text enemiesText;
-
-	public bool gameOver = false;
 
 	private int score = 0;
 	public int enemyAmount = 10;
@@ -72,6 +73,14 @@ public class LevelGenerator : MonoBehaviour
 
 		int hs = GetHighScore();
 		highScore.text = "High Score: " + hs.ToString ();
+	}
+
+	void Update()
+	{
+		if (gameOver == true && Input.GetKeyDown (KeyCode.Space)) 
+		{
+			SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+		}
 	}
 
 	int GetHighScore()
@@ -192,6 +201,9 @@ public class LevelGenerator : MonoBehaviour
 	void SpawnObjects()
 	{
 		GameObject playerInstance = Instantiate(player, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
+		PlayerController pc = playerInstance.GetComponent<PlayerController> ();
+		pc.levelGen = this;
+		pc.healthText = healthText;
 
 		// Instantiate & configure camera
 		GameObject cameraInstance = Instantiate(camera, createdTiles[Random.Range(0, createdTiles.Count)], Quaternion.identity);
@@ -258,9 +270,45 @@ public class LevelGenerator : MonoBehaviour
 	{
 		enemyAmount--;
 
+		enemyCount.text = "Enemies Remaining: " + enemyAmount.ToString ();
+
+		PlayerScored ();
+
 		if (enemyAmount == 0) {
 			print ("Spawn portal at: " + position);
 			Instantiate (portal, position, Quaternion.identity);
 		}
+
 	}
+
+	public void PlayerScored()
+	{
+//		if (enemyAmount--) 
+//		{
+			score++; 
+			scoreText.text = "Score: " + score.ToString ();
+
+			int hs = GetHighScore ();
+			if (score > hs) 
+			{
+				PlayerPrefs.SetInt ("HighScore", score);
+			}
+//		}
+	}
+
+//	public void EnemiesRemaining()
+//	{
+//		enemyCount = 10;
+//
+//	}
+
+	public void PlayerDied()
+	{
+		//if (playerDead == true)
+			gameOver = true; 
+
+		gameOverText.SetActive (true);
+	}
+
+
 }

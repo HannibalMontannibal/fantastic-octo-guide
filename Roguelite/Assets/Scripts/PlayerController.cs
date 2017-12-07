@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour 
 {
 	//determines player health
 	public int currentHealth;
 	public int maxHealth;
+
 
 	//determines the player's movement speed
 	public float moveSpeed;
@@ -15,13 +18,18 @@ public class PlayerController : MonoBehaviour
 
 	private Animator anim;
 
-	public bool playerDead = false;
+	public LevelGenerator levelGen;
+
+	public Text healthText;
+
 
 	// Use this for initialization
 	void Start()
 	{
 		//at spawn, the enemy's current health is whatever it's maximum health is.
 		currentHealth = maxHealth;
+
+		healthText.text = "Health Remaining: " + currentHealth.ToString ();
 
 		myRigidbody = GetComponent<Rigidbody2D>();
 	}
@@ -62,21 +70,26 @@ public class PlayerController : MonoBehaviour
 		//{
 		//	Destroy (gameObject);
 		//}
-			
+
+
 	}
 	public void TakeDamage(int damage)
 	{
 		gameObject.GetComponent<Animator> ().SetTrigger ("Hurt");
 
 		currentHealth -= damage;
+		healthText.text = "Health Remaining: " + currentHealth.ToString ();
+
 		if (currentHealth <= 0) 
 		{
 			Debug.Log ("Dead");
-			Destroy (gameObject);
 
-			{
-				playerDead = true;
+			if (levelGen != null) {
+				levelGen.PlayerDied ();
 			}
+			Destroy (gameObject);
 		}
 	}
+
+
 }
