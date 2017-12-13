@@ -14,9 +14,12 @@ public class EnemyAttacking : MonoBehaviour
     private float lastAttackTime;
     public float attackDelay;
 
+	private bool attacking = false;
+	private Animator anim;
+
     // Use this for initialization
     void Start () {
-		
+		anim = gameObject.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +39,9 @@ public class EnemyAttacking : MonoBehaviour
 					target.SendMessage ("Damage", damage, SendMessageOptions.DontRequireReceiver);
 					//Records the time the enemy last attacked
 					lastAttackTime = Time.time;
+
+					attacking = true; 
+					anim.SetBool ("Attacking", attacking);
 				}
 			}
 		}
