@@ -310,8 +310,9 @@ public class LevelGenerator : MonoBehaviour
 	{
 		//if (playerDead == true)
 			gameOver = true; 
-
+	
 		gameOverText.SetActive (true);
+
 	}
 
 
