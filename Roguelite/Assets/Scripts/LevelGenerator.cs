@@ -71,8 +71,6 @@ public class LevelGenerator : MonoBehaviour
         //To make a specific seed:  (the specific number in place of 'x' is the same level)
         //Random.seed = 10;
 
-		//makes the cursor invisible
-		Cursor.visible = false;
 
 		int hs = GetHighScore();
 		highScore.text = "High Score: " + hs.ToString ();
@@ -80,10 +78,16 @@ public class LevelGenerator : MonoBehaviour
 
 	void Update()
 	{
+		//reloads the game when spacebar is hit, provided that the player is dead
 		if (gameOver == true && Input.GetKeyDown (KeyCode.Space)) 
 		{
 			SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
 		}
+
+		//makes the cursor invisible
+			Cursor.visible = false;
+		
+
 	}
 
 	int GetHighScore()
@@ -310,8 +314,16 @@ public class LevelGenerator : MonoBehaviour
 	{
 		//if (playerDead == true)
 			gameOver = true; 
+
 	
 		gameOverText.SetActive (true);
+
+		//makes the cursor visible if it's Game Over
+		if (gameOver = true) 
+		{
+			Cursor.visible = true;
+
+		}
 
 	}
 
