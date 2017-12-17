@@ -79,19 +79,22 @@ public class PlayerController : MonoBehaviour
 	{
 		gameObject.GetComponent<Animator> ().SetTrigger ("Hurt");
 
+		//removes health by however much damage the enemies dealt
 		currentHealth -= damage;
 		healthText.text = "Health Remaining: " + currentHealth.ToString ();
 
+		//plays audio when the player takes damage
 		audioSource.Play ();
 
+		//if the player health is zero or less, the player dies
 		if (currentHealth <= 0) 
 		{
 			Debug.Log ("Dead");
-
+			Destroy (gameObject);
 			if (levelGen != null) {
 				levelGen.PlayerDied ();
 			}
-			Destroy (gameObject);
+
 		}
 	}
 
