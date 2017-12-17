@@ -11,7 +11,7 @@ public class PlayerAttacking : MonoBehaviour
 	public float coolDownLength = 1.0f;
 
 	private float animationTimer = 0;
-	public float animationLength = 0.6f;
+	public float animationLength = 0.3f;
 
 	public Collider2D attackTrigger;
 

@@ -58,27 +58,10 @@ public class LevelGenerator : MonoBehaviour
 	public float extraWallX;
 	public float extraWallY;
 
-	public static LevelGenerator control;
 
 	public GameObject mainCamera;
 
 	// Use this for initialization
-
-	void Awake ()
-	{
-		//if there is no other game object of this type (level generator) this allows for this specific game object to
-		//be the only one throughout all scenes
-		if (control == null) {
-			DontDestroyOnLoad (gameObject);
-			control = this;
-		}
-
-		//if one already exists, destroy this copy of it so as to avoid duplicates
-		else if (control != this) 
-		{
-			Destroy (gameObject);
-		}
-	}
 	void Start ()
 	{
 

@@ -9,12 +9,12 @@ public class CameraController : MonoBehaviour {
 
 	public bool levelLoaded;
 
-
 	//gives a position of the camera to aim towards the Target
 	private Vector3 targetPos;
 
 	//how fast the camera chases the player
 	public float moveSpeed;
+
 
 	// Use this for initialization
 	void Start () 
