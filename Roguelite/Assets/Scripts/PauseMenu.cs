@@ -39,8 +39,8 @@ public class PauseMenu : MonoBehaviour {
 
 	public void QuitGame()
 	{
-		//Quits the game when Built
-		//Debug.Log ("Game has been quitted");
+		//Quits the game when Built. If in scene, just shows up in Log.
+		Debug.Log ("Game has been quit");
 		Application.Quit ();
 	}
 
