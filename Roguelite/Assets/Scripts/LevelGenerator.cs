@@ -22,7 +22,7 @@ public class LevelGenerator : MonoBehaviour
 	public Text healthText;
 
 	private int score = 0;
-	public int enemyAmount = 10;
+	public int enemyAmount = 15;
 
 	//the [] shows that this variable is going to be an array
 	public GameObject[] tiles;
