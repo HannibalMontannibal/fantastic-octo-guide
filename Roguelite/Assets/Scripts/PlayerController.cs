@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
 	public Text healthText;
 
+	public AudioSource audioSource;
+
 
 	// Use this for initialization
 	void Start()
@@ -79,6 +81,8 @@ public class PlayerController : MonoBehaviour
 
 		currentHealth -= damage;
 		healthText.text = "Health Remaining: " + currentHealth.ToString ();
+
+		audioSource.Play ();
 
 		if (currentHealth <= 0) 
 		{

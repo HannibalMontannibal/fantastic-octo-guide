@@ -46,5 +46,7 @@ public class PlayerAttacking : MonoBehaviour
 		attackTrigger.enabled = attacking;
 
 		anim.SetBool ("Attacking", attacking);
+
+
 	}
 }

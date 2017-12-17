@@ -40,6 +40,8 @@ public class EnemyAI : MonoBehaviour
 	private Vector3 moveDirection;
 
 	public LevelGenerator levelGenerator;
+	public AudioSource audioSource;
+
 
 	void Start()
 	{
@@ -139,7 +141,7 @@ public class EnemyAI : MonoBehaviour
 	{
 		currentHealth -= damage;
 		gameObject.GetComponent<Animator> ().SetTrigger ("Hurt");
-
+		audioSource.Play ();
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
