@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour {
 	//		//if there is no other game object of this type (level generator) this allows for this specific game object to
 	//		//be the only one throughout all scenes
 			if (control == null) {
+
+			//doesn't destroy the object this is attached to upon reloading
 				DontDestroyOnLoad (gameObject);
 				control = this;
 			}

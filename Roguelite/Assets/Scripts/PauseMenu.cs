@@ -46,12 +46,13 @@ public class PauseMenu : MonoBehaviour {
 
 	public void Continue()
 	{
+		//continues the game
 		isPaused = false;
 	}
 
 	public void Restart()
 	{
-		
+		//restarts  the game
 		SceneManager.LoadScene ("MainGame");
 	
 	}

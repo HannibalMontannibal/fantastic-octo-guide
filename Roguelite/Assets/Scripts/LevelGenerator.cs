@@ -288,9 +288,10 @@ public class LevelGenerator : MonoBehaviour
 	{
 //		if (enemyAmount--) 
 //		{
+		//adds a point for every enemy killed
 			score++; 
 			scoreText.text = "Score: " + score.ToString ();
-
+		//gets- and stores- the player's high score
 			int hs = GetHighScore ();
 			if (score > hs) 
 			{

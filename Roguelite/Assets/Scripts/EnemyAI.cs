@@ -123,6 +123,7 @@ public class EnemyAI : MonoBehaviour
 		{
 			levelGenerator.EnemyDied (transform.position);
 			Destroy (gameObject);
+
 		}
 			
 		if (myrigid.velocity.x > 0.001f) {
@@ -140,8 +141,8 @@ public class EnemyAI : MonoBehaviour
 	public void Damage (int damage)
 	{
 		currentHealth -= damage;
-		gameObject.GetComponent<Animator> ().SetTrigger ("Hurt");
 		audioSource.Play ();
+		gameObject.GetComponent<Animator> ().SetTrigger ("Hurt");
 	}
 
 	void OnTriggerEnter2D(Collider2D other)
