@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		//at spawn, the enemy's current health is whatever it's maximum health is.
+		//at spawn, the player's current health is whatever it's maximum health is.
 		currentHealth = maxHealth;
 
 		healthText.text = "Health Remaining: " + currentHealth.ToString ();
